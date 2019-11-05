@@ -278,5 +278,35 @@ export const locations = [
         name: "Speeltuin A Hoeve",
         lat: 52.222571,
         lon: 5.201409
+    },
+    {
+        name: "Lange appie",
+        lat: 52.222164,
+        lon: 5.175846
+    },
+    {
+        name: "Speelplaats",
+        lat: 52.217898,
+        lon: 5.171757
+    },
+    {
+        name: "Dunkin Donuts",
+        lat: 52.224729,
+        lon: 5.177244
+    },
+    {
+        name: "Bowling Centrum",
+        lat: 52.226310,
+        lon: 5.172636
+    },
+    {
+        name: "Dudok speeltuin",
+        lat: 52.228019,
+        lon: 5.169788
+    },
+    {
+        name: "8ball",
+        lat: 52.230599,
+        lon: 5.170402
     }
 ];

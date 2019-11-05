@@ -97,6 +97,7 @@
     "reselect": "4.0.0",
     "sanitize.css": "8.0.0",
     "styled-components": "4.2.0",
+    "sweetalert2": "^9.1.0",
     "yandex-map-react": "^1.1.1"
   },
   "devDependencies": {
