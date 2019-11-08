@@ -9,6 +9,7 @@ import 'css/bootstrap.min.css';
 
 import Row from 'reactstrap/es/Row';
 import HomePage from './pages/home/HomePage';
+import Container from "reactstrap/es/Container";
 
 ReactDOM.render(
   <Router>
@@ -16,7 +17,9 @@ ReactDOM.render(
       <Row>
         <Switch>
           <Route path="/">
-            <HomePage />
+            <Container>
+                <HomePage />
+            </Container>
           </Route>
         </Switch>
       </Row>

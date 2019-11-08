@@ -101,7 +101,7 @@ export default class HomePage extends React.Component {
                         ) : (
                             <Container className={'justify-content-center'}>
                                 <Row>
-                                    <Col md={'11'}>
+                                    <Col md={'12'}>
                                         <Jumbotron>
                                             <Row>
                                                 <Col md={'4'}>
@@ -117,7 +117,7 @@ export default class HomePage extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={'11'}>
+                                    <Col md={'12'}>
                                         <Card>
                                             <CardBody>
                                                 <TagMap locations={this.state.locations} teams={this.state.teams}/>
