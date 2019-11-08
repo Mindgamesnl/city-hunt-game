@@ -50,8 +50,6 @@ module.exports.TeamService = class TeamService {
     boot() {
 
         // register test teams
-        log(this.registerTeam('Welivesum'));
-        log(this.registerTeam('Amsterdam'));
     }
 
     reCalculateScores() {
