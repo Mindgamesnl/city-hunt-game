@@ -1,10 +1,11 @@
 import {fetch} from 'whatwg-fetch'
+import {config} from "../../../config/web-config";
 
 export default class ApiRequest {
 
     constructor(path) {
         this.endpoint = path;
-        this.path = "http://localhost" + path;
+        this.path = config.API_HOST + path;
         this.method = "GET";
         this.context = {};
     }

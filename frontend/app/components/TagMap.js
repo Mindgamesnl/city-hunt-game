@@ -109,11 +109,7 @@ export default class TagMap extends React.Component {
                         })
                     }}>
                         <MarkerLayout>
-                            <div style={{borderRadius: '50%', overflow: 'hidden'}}>
-                                <svg height="100" width="100">
-                                    <circle cx="30" cy="30" r="10" stroke="black" strokeWidth="3" fill="white"/>
-                                </svg>
-                            </div>
+                            <h2 style={{bottom: '0', right: '0', position: 'absolute', color: 'black'}}>&#10687;</h2>
                         </MarkerLayout>
                     </Marker>
                 )
@@ -128,12 +124,7 @@ export default class TagMap extends React.Component {
                         })
                     }}>
                         <MarkerLayout>
-                            <div style={{borderRadius: '50%', overflow: 'hidden'}}>
-                                <svg height="100" width="100">
-                                    <circle cx="30" cy="30" r="10" stroke="black" strokeWidth="3"
-                                            fill={'' + team.color}/>
-                                </svg>
-                            </div>
+                            <h2 style={{top: '50%', left: '50%', color: team.color}}>&#10687;</h2>
                         </MarkerLayout>
                     </Marker>
                 )
@@ -151,10 +142,7 @@ export default class TagMap extends React.Component {
                             })
                         }}>
                     <MarkerLayout>
-                        <svg height="70" width="70" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11 21.883l-6.235-7.527-.765.644 7.521 9 7.479-9-.764-.645-6.236 7.529v-21.884h-1v21.883z"/>
-                        </svg>
+                        <h1 style={{top: '50%', left: '50%', color: 'black'}}>&#8226;</h1>
                     </MarkerLayout>
                 </Marker>
             )
@@ -163,7 +151,7 @@ export default class TagMap extends React.Component {
         return (
             <Map width={'100%'} height={600} onAPIAvailable={function () {
                 console.log('API loaded');
-            }} loadOptions={{lang: 'en_US'}} center={[position[0], position[1]]} zoom={13}>
+            }} loadOptions={{lang: 'en_US'}} center={[position[0], position[1]]} zoom={14}>
                 {markers}
             </Map>
         )
