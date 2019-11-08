@@ -54,7 +54,11 @@ export default class TagMap extends React.Component {
 
                 if (inRange && inRange !== currentTarget) {
                     if (!currentTarget && currentTarget.name === inRange.name) this.handleFind();
+                } else {
+                    // send regular location
+                    this.syncLoc();
                 }
+
 
                 currentTarget = inRange;
             });
@@ -66,6 +70,23 @@ export default class TagMap extends React.Component {
 
             this.setState({gps});
         }
+    }
+
+    syncLoc() {
+        new ApiRequest("/api/v1/team/setloc")
+            .post()
+            .setContext({
+                "lat": this.state.myLocation.latitude,
+                "lon": this.state.myLocation.longitude
+            })
+            .auth()
+            .run()
+            .then(result => {
+
+            })
+            .catch((err) => {
+                console.log(err)
+            });
     }
 
     handleFind() {
@@ -109,7 +130,7 @@ export default class TagMap extends React.Component {
                         })
                     }}>
                         <MarkerLayout>
-                            <h2 style={{bottom: '0', right: '0', position: 'absolute', color: 'black'}}>&#10687;</h2>
+                            <h2 style={{bottom: '0', right: '0', color: 'black'}}>&#10687;</h2>
                         </MarkerLayout>
                     </Marker>
                 )

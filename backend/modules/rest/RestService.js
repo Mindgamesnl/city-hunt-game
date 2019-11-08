@@ -3,6 +3,7 @@ const {CreateTeamEndpoint} = require("./endpoints/team/CreateTeamEndpoint");
 const {SetLocationEndpoint} = require("./endpoints/team/SetLocationEndpoint");
 const {GetLocationsEndpoints} = require("./endpoints/static/GetLocationsEndpoints");
 const fs = require("fs");
+const {LogLocationEndpoint} = require("./endpoints/team/UpdateLocation");
 
 module.exports.RestService = class RestService {
 
@@ -39,6 +40,7 @@ module.exports.RestService = class RestService {
         new SetLocationEndpoint();
         new CreateTeamEndpoint();
         new HandshakeEndpoint();
+        new LogLocationEndpoint();
 
         log("Finished routes. total " + this.endpoints)
     }
