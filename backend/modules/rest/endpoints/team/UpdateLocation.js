@@ -21,7 +21,7 @@ module.exports.LogLocationEndpoint = class LogLocationEndpoint extends PublicEnd
             }
         }
 
-        const team = Server.teamService.getTeamByAccessToken(token);
+        const team = Server.teamService.getTeamByAccessToken(request.body.token);
         if (team == null) return null;
 
         team.lat = request.body.lat;
