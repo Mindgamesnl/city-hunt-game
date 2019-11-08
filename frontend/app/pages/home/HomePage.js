@@ -53,10 +53,12 @@ export default class HomePage extends React.Component {
 
     render() {
 
-        const myTeam = [];
+        let teamName;
+        let teamColor;
 
-        if (this.state.teams.length > 0) {
-
+        if (this.state.teams.length !== 0) {
+            teamName = this.state.teams[this.state.teamId].name;
+            teamColor = this.state.teams[this.state.teamId].color;
         }
 
         return (
@@ -104,11 +106,11 @@ export default class HomePage extends React.Component {
                                             <Row>
                                                 <Col md={'4'}>
                                                     <Alert color={'info'}>
-                                                        Welkom team (team)! Jouw kleur is (color).
+                                                        Welkom team {teamName}! Jouw kleur is <span style={{color: teamColor}} className="sim">███</span>.
                                                     </Alert>
                                                 </Col>
                                                 <Col md={'8'}>
-                                                    <ScoreBoard teams={this.state.teams} />
+                                                    <ScoreBoard teams={this.state.teams}/>
                                                 </Col>
                                             </Row>
                                         </Jumbotron>
