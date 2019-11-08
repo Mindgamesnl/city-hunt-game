@@ -53,7 +53,7 @@ export default class HomePaAdminPagege extends React.Component {
     handleFieldChange(event) {
 
         let update = {};
-        
+
         update[event.target.id] = event.target.value;
 
         this.setState(update);

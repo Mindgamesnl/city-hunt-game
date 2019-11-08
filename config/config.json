@@ -3,5 +3,12 @@
     "lat": 52.235660,
     "lon": 5.200207
   },
+
+  "cert": {
+    "cert": "/etc/letsencrypt/live/craftmendserver.eu/cert.pem",
+    "key": "/etc/letsencrypt/live/craftmendserver.eu/privkey.pem"
+  },
+  "port": 1970,
+
   "password": "secret123"
 }
