@@ -308,5 +308,10 @@
     "name": "8ball",
     "lat": 52.230599,
     "lon": 5.170402
+  },
+  {
+    "name": "Beatrix theater (utrecht)",
+    "lat": 52.088650,
+    "lon": 5.107889
   }
 ]
