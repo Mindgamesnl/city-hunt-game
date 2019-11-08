@@ -10,6 +10,7 @@ import Table from "reactstrap/es/Table";
 import Jumbotron from "reactstrap/es/Jumbotron";
 import ApiRequest from "../../helpers/ApiRequest";
 import ScoreBoard from "../../components/ScoreBoard";
+import {win} from "leaflet/src/core/Browser";
 
 export default class HomePage extends React.Component {
 
@@ -17,7 +18,7 @@ export default class HomePage extends React.Component {
         locations: [],
         teams: [],
         error: null,
-        teamId: location.href.split("#")[1],
+        teamId: window.teamId,
         updateTimer: -1
     };
 
@@ -28,6 +29,9 @@ export default class HomePage extends React.Component {
             new ApiRequest("/api/v1/locations")
                 .run()
                 .then(result => {
+
+                    if (result.teams[this.state.teamId] == null) window.location.reload();
+
                     this.setState({
                         locations: result.locations,
                         teams: result.teams

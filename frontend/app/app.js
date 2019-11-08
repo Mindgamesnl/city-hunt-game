@@ -10,20 +10,32 @@ import 'css/bootstrap.min.css';
 import Row from 'reactstrap/es/Row';
 import HomePage from './pages/home/HomePage';
 import Container from "reactstrap/es/Container";
+import ApiRequest from "./helpers/ApiRequest";
 
-ReactDOM.render(
-  <Router>
-    <div>
-      <Row>
-        <Switch>
-          <Route path="/">
-            <Container>
-                <HomePage />
-            </Container>
-          </Route>
-        </Switch>
-      </Row>
-    </div>
-  </Router>,
-  document.getElementById('app'),
-);
+new ApiRequest("/api/v1/team")
+    .post()
+    .auth()
+    .run()
+    .then(team => {
+        window.teamId = team.id;
+        ReactDOM.render(
+            <Router>
+                <div>
+                    <Row>
+                        <Switch>
+                            <Route path="/">
+                                <Container>
+                                    <HomePage />
+                                </Container>
+                            </Route>
+                        </Switch>
+                    </Row>
+                </div>
+            </Router>,
+            document.getElementById('app'),
+        );
+
+    })
+    .catch(() => {
+        document.writeln("Invalid access token.");
+    });

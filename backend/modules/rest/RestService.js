@@ -1,3 +1,5 @@
+const {HandshakeEndpoint} = require("./endpoints/team/Handshake");
+const {CreateTeamEndpoint} = require("./endpoints/team/CreateTeamEndpoint");
 const {SetLocationEndpoint} = require("./endpoints/team/SetLocationEndpoint");
 const {GetLocationsEndpoints} = require("./endpoints/static/GetLocationsEndpoints");
 module.exports.RestService = class RestService {
@@ -25,6 +27,8 @@ module.exports.RestService = class RestService {
     boot() {
         new GetLocationsEndpoints();
         new SetLocationEndpoint();
+        new CreateTeamEndpoint();
+        new HandshakeEndpoint();
 
         log("Finished routes. total " + this.endpoints)
     }

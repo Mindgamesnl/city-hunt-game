@@ -19,8 +19,12 @@ module.exports.LocationService = class LocationService {
         return mappedLocations;
     }
 
-    getLocationAtCoordinate(cord, teamID) {
+    getLocationAtCoordinate(cord, token) {
         const targets = this.gps.updateFrom(cord.latitude, cord.longitude);
+        const team = Server.teamService.getTeamByAccessToken(token);
+        if (team == null) return null;
+        const teamID = team.id;
+
         let inRange = null;
 
         targets.forEach(tracker => {

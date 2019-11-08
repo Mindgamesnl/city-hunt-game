@@ -6,14 +6,24 @@ module.exports.TeamService = class TeamService {
     constructor() {
         this.colors = ['red', 'green', 'blue', 'yellow', 'black', 'orange', 'aqua', 'PaleVioletRed', 'MediumVioletRed', 'Crimson', 'DimGrey', 'Tan', 'Salmon'];
         this.teams = {};
+        this.accesTokens = {};
     }
 
     registerTeam(name) {
         const id = uuidv4();
         const color = this._randomColor();
+        const accessToken = this.makeid(6);
         this._removeColor(color);
 
+        this.accesTokens[accessToken] = id;
         this.teams[id] = new Team(id, name, color);
+
+        return accessToken;
+    }
+
+    getTeamByAccessToken(token){
+        if (this.accesTokens[token] == null) return null;
+        return this.teams[this.accesTokens[token]];
     }
 
     _removeColor(color) {
@@ -23,20 +33,30 @@ module.exports.TeamService = class TeamService {
         }
     }
 
+    makeid(length) {
+        let result = '';
+        let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
     _randomColor() {
-        return this.colors[Math.floor(Math.random()*this.colors.length)];
+        return this.colors[Math.floor(Math.random() * this.colors.length)];
     }
 
     boot() {
 
         // register test teams
-        this.registerTeam('Welivesum');
-        this.registerTeam('Amsterdam');
-        log(this.teams)
+        log(this.registerTeam('Welivesum'));
+        log(this.registerTeam('Amsterdam'));
     }
 
     reCalculateScores() {
-        const locations = Server.locationService.getMappedLocations();;
+        const locations = Server.locationService.getMappedLocations();
+        ;
 
         for (let teamId in this.teams) {
             if (this.teams.hasOwnProperty(teamId)) {

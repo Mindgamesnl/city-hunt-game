@@ -1,14 +1,11 @@
-const {Coordinate} = require("../../../locations/tools/Coordinate");
 const {PublicEndpoint} = require("../../framework/PublicEndpoint");
 
-module.exports.SetLocationEndpoint = class SetLocationEndpoint extends PublicEndpoint {
+module.exports.HandshakeEndpoint = class HandshakeEndpoint extends PublicEndpoint {
 
     constructor() {
-        super("post", "/api/v1/team/pushloc");
+        super("post", "/api/v1/team");
 
         this.requiredFields = [
-            "lat",
-            "lon",
             "token"
         ];
     }
@@ -21,19 +18,15 @@ module.exports.SetLocationEndpoint = class SetLocationEndpoint extends PublicEnd
             }
         }
 
-        const found = Server.locationService.getLocationAtCoordinate(new Coordinate(request.body.lat, request.body.lon), request.body.token);
+        const found = Server.teamService.getTeamByAccessToken(request.body.token);
 
         if (found) {
             response.status(200).json({
-                success: true, data: {
-                    found: true,
-                    name: found.name,
-                    worth: found.worth
-                }
+                success: true, data: found
             });
         } else {
             response.status(200).json({
-                success: true, data: {found:false}
+                success: false, data: {found:false}
             });
         }
     }

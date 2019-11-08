@@ -10,7 +10,7 @@ export default class ScoreBoard extends React.Component {
 
 
     static propTypes = {
-        teams: PropTypes.object
+        teams: PropTypes.any
     };
 
     static defaultProps = {
@@ -23,7 +23,7 @@ export default class ScoreBoard extends React.Component {
         for (let teamId in this.props.teams) {
             if (this.props.teams.hasOwnProperty(teamId)) {
                 states.push(
-                    <tr>
+                    <tr key={teamId}>
                         <td>{this.props.teams[teamId].name}</td>
                         <td>{this.props.teams[teamId].score}</td>
                     </tr>

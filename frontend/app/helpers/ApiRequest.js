@@ -20,7 +20,7 @@ export default class ApiRequest {
     }
 
     auth() {
-        this.context.teamId = location.href.split("#")[1];
+        this.context.token = location.href.split("#")[1];
         return this;
     }
 

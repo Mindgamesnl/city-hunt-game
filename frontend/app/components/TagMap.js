@@ -17,7 +17,7 @@ export default class TagMap extends React.Component {
 
     static propTypes = {
         locations: PropTypes.array,
-        teams: PropTypes.object
+        teams: PropTypes.any
     };
 
     static defaultProps = {
