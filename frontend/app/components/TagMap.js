@@ -17,19 +17,23 @@ export default class TagMap extends React.Component {
 
     static propTypes = {
         locations: PropTypes.array,
-        teams: PropTypes.any
+        teams: PropTypes.any,
+        isAdmin: PropTypes.bool
     };
 
     static defaultProps = {
         locations: [],
-        teams: {}
+        teams: {},
+        isAdmin: false
     };
 
     componentWillUnmount() {
+        if (this.props.isAdmin) return;
         this.state.gps.stop();
     }
 
     componentDidUpdate(prevProps) {
+        if (this.props.isAdmin) return;
         let currentTarget = false;
         if (prevProps.locations.length !== this.props.locations.length) {
             if (this.state.gps) {

@@ -8,9 +8,13 @@ module.exports.CreateTeamEndpoint = class CreateTeamEndpoint extends PublicEndpo
 
     onRequest(request, response) {
         if (config.config.password === request.params.password) {
-            response.send(Server.teamService.registerTeam(request.params.name));
+            response.status(200).json({
+                success: true, data: Server.teamService.registerTeam(request.params.name)
+            });
         } else {
-            response.send("invalid pass");
+            response.status(200).json({
+                success: false, data: {}
+            });
         }
     }
 
