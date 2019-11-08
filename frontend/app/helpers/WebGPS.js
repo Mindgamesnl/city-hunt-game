@@ -7,7 +7,7 @@ export default class WebGPS {
         this.onError = onError;
         this._trackers = [];
 
-        navigator.geolocation.watchPosition((update) => {
+        this.watcher = navigator.geolocation.watchPosition((update) => {
             this._locationUpdate(update.coords.latitude, update.coords.longitude);
         }, this.onError, {enableHighAccuracy: true});
     }
@@ -17,6 +17,10 @@ export default class WebGPS {
             data: data,
             coordinates: new Coordinate(lat, long)
         });
+    }
+
+    stop() {
+        navigator.geolocation.clearWatch(this.watcher);
     }
 
     _locationUpdate(lat, long) {

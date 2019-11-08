@@ -8,62 +8,126 @@ import Col from "reactstrap/es/Col";
 import Alert from "reactstrap/es/Alert";
 import Table from "reactstrap/es/Table";
 import Jumbotron from "reactstrap/es/Jumbotron";
+import ApiRequest from "../../helpers/ApiRequest";
+import ScoreBoard from "../../components/ScoreBoard";
 
 export default class HomePage extends React.Component {
+
+    state = {
+        locations: [],
+        teams: [],
+        error: null,
+        teamId: location.href.split("#")[1],
+        updateTimer: -1
+    };
+
+    componentDidMount() {
+        if (this.state.teamId === undefined) return;
+
+        const timer = setInterval(() => {
+            new ApiRequest("/api/v1/locations")
+                .run()
+                .then(result => {
+                    this.setState({
+                        locations: result.locations,
+                        teams: result.teams
+                    })
+                })
+                .catch((err) => {
+                    console.log("whoops")
+                    console.error(err)
+                    this.setState({
+                        error: 'Er ging iets mis tijdens het ophalen van de locaties'
+                    })
+                });
+        }, 3000);
+
+        this.setState({
+            updateTimer: timer
+        })
+    }
+
+    componentWillUnmount() {
+        clearImmediate(this.state.updateTimer);
+    }
+
     render() {
+
+        const myTeam = [];
+
+        if (this.state.teams.length > 0) {
+
+        }
+
         return (
-            <Container>
-                <Row>
-                    <Col md={'12'}>
-                        <Jumbotron>
-                            <Row>
-                                <Col md={'4'}>
-                                    <Alert color={'info'}>
-                                        Welkom team (team)! Jouw kleur is (color).
+            <div style={{width: '100%'}}>
+                {this.state.teamId === undefined ? (
+                    <Container>
+                        <Row>
+                            <Col md={'12'}>
+                                <Jumbotron>
+                                    <Alert>
+                                        Alleen geldige team urls mogen gebruikt worden.
                                     </Alert>
-                                </Col>
-                                <Col md={'8'}>
-                                    <Table>
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Team naam</th>
-                                            <th>Score</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Welivesum</td>
-                                            <td>1206</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Welivehere</td>
-                                            <td>874</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Weesp</td>
-                                            <td>0</td>
-                                        </tr>
-                                        </tbody>
-                                    </Table>
-                                </Col>
-                            </Row>
-                        </Jumbotron>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={'12'}>
-                        <Card>
-                            <CardBody>
-                                <TagMap/>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+                                </Jumbotron>
+                            </Col>
+                        </Row>
+                    </Container>
+                ) : (
+
+                    <div>
+                        {this.state.locations === null ? (
+                            <Container>
+                                <Row>
+                                    <Col md={'12'}>
+                                        <Jumbotron>
+                                            <Alert>
+                                                {this.state.error != null ? (
+                                                    <div>
+                                                        Error: {this.state.error}
+                                                    </div>
+                                                ) : (
+                                                    <div>
+                                                        Even geduld..
+                                                    </div>
+                                                )}
+                                            </Alert>
+                                        </Jumbotron>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        ) : (
+                            <Container className={'justify-content-center'}>
+                                <Row>
+                                    <Col md={'11'}>
+                                        <Jumbotron>
+                                            <Row>
+                                                <Col md={'4'}>
+                                                    <Alert color={'info'}>
+                                                        Welkom team (team)! Jouw kleur is (color).
+                                                    </Alert>
+                                                </Col>
+                                                <Col md={'8'}>
+                                                    <ScoreBoard teams={this.state.teams} />
+                                                </Col>
+                                            </Row>
+                                        </Jumbotron>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={'11'}>
+                                        <Card>
+                                            <CardBody>
+                                                <TagMap locations={this.state.locations} teams={this.state.teams}/>
+                                            </CardBody>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        )}
+                    </div>
+                )}
+            </div>
         );
     }
 }
