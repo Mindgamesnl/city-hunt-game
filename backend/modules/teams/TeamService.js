@@ -54,7 +54,6 @@ module.exports.TeamService = class TeamService {
 
     reCalculateScores() {
         const locations = Server.locationService.getMappedLocations();
-        ;
 
         for (let teamId in this.teams) {
             if (this.teams.hasOwnProperty(teamId)) {
