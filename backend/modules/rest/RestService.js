@@ -44,7 +44,7 @@ module.exports.RestService = class RestService {
     }
 
     registerEndpoint(method, route, handler) {
-        this.http[method](route, handler);
+        this.app[method](route, handler);
     }
 
 };
