@@ -27,9 +27,4 @@ npm install
 npm run-script build
 ```
  - serve from the build directory
- 
 
-
-## Credits
- - React Boilerplate - https://github.com/react-boilerplate/react-boilerplate
- - WebGPS - https://github.com/Mindgamesnl/web-gps
